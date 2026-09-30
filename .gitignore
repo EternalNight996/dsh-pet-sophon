@@ -7,7 +7,9 @@ out/
 pet-diag.log
 *.out
 *.err
-preview/*.png
+
+# 预览图是 README 的引用素材，必须入库；但临时渲染产物不入库
+preview/tmp-*.png
 
 # 编辑器
 .vscode/
