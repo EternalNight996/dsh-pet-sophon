@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>智子桌面宠物 · 皮肤预览</title>
+<style>
+  body { background: #0b0f14; color: #e5e7eb; font: 14px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif; margin: 24px; }
+  h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  p { color: #94a3b8; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  figure { margin: 0; text-align: center; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 12px; }
+  .eye { display: flex; justify-content: center; }
+  figcaption { margin-top: 8px; font-size: 12px; color: #cbd5e1; }
+  code { color: #64748b; }
+  @keyframes pet-halo { 0%,100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.14); } }
+  @keyframes pet-aura-spin { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.1); } }
+  @keyframes pet-spark { 0%,100% { opacity: 0; } 45% { opacity: 0; } 50% { opacity: 1; } 58% { opacity: 0.2; } 66% { opacity: 0.9; } }
+  @keyframes pet-ash { 0% { transform: translateY(0); opacity: 0.6; } 100% { transform: translateY(26px); opacity: 0; } }
+  @keyframes pet-ember { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateY(-28px) scale(0.25); opacity: 0; } }
+  #glow { animation: pet-halo 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
+  .aura { animation: pet-aura-spin 9s linear infinite; transform-origin: 100px 100px; }
+  .spark { animation: pet-spark 2.6s linear infinite; }
+  .ash { animation: pet-ash 3.2s linear infinite; }
+  .ember { animation: pet-ember 2.4s ease-out infinite; }
+</style></head>
+<body>
+  <h1>智子桌面宠物 · 皮肤预览</h1>
+  <p>共 11 款皮肤。此页由 <code>tests/eye-svg.test.mjs</code> 自动生成，用于肉眼确认画面。</p>
+  <div class="grid">
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-ef" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-ef" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#8a5a3b"/>
+      <stop offset="55%" stop-color="#4a2e1a"/>
+      <stop offset="100%" stop-color="#160b06"/>
+    </radialGradient>
+    <radialGradient id="glow-ef" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(120,80,50,0.35)"/>
+      <stop offset="60%" stop-color="rgba(120,80,50,0.35)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(120,80,50,0.35)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-ef"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-ef)"/>
+  
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-ef)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-ef)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-ef)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="17" ry="17" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-ef)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>原色（人眼） <code>cyan</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-eg" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-eg" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="55%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </radialGradient>
+    <radialGradient id="glow-eg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(79,70,229,0.55)"/>
+      <stop offset="60%" stop-color="rgba(79,70,229,0.55)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(79,70,229,0.55)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-eg"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-eg)"/>
+  <g class="aura" opacity="0.5"><ellipse cx="100" cy="100" rx="94" ry="70" fill="none" stroke="rgba(79,70,229,0.4)" stroke-width="3" stroke-dasharray="1 10"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-eg)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-eg)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-eg)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="30" ry="30" fill="none" stroke="#05070b" stroke-width="9"/><ellipse cx="100" cy="100" rx="12" ry="12" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-eg)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>宇宙死瞳 <code>void</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-eh" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-eh" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="55%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#0b0f14"/>
+    </radialGradient>
+    <radialGradient id="glow-eh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(139,92,246,0.6)"/>
+      <stop offset="60%" stop-color="rgba(139,92,246,0.6)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(139,92,246,0.6)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-eh"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-eh)"/>
+  <g class="aura" opacity="0.7"><circle class="spark" cx="174.0" cy="100.0" r="1.1" fill="#c7d2fe" style="animation-delay:0.00s"/><circle class="spark" cx="162.8" cy="138.0" r="1.7" fill="#c7d2fe" style="animation-delay:0.28s"/><circle class="spark" cx="115.6" cy="163.8" r="1.1" fill="#c7d2fe" style="animation-delay:0.56s"/><circle class="spark" cx="63.0" cy="146.1" r="1.7" fill="#c7d2fe" style="animation-delay:0.84s"/><circle class="spark" cx="22.9" cy="120.2" r="1.1" fill="#c7d2fe" style="animation-delay:1.12s"/><circle class="spark" cx="15.4" cy="77.8" r="1.7" fill="#c7d2fe" style="animation-delay:1.40s"/><circle class="spark" cx="63.0" cy="53.9" r="1.1" fill="#c7d2fe" style="animation-delay:1.68s"/><circle class="spark" cx="114.2" cy="41.9" r="1.7" fill="#c7d2fe" style="animation-delay:1.96s"/><circle class="spark" cx="168.9" cy="58.3" r="1.1" fill="#c7d2fe" style="animation-delay:2.24s"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-eh)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-eh)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-eh)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="30" ry="30" fill="none" stroke="#05070b" stroke-width="9"/><ellipse cx="100" cy="100" rx="12" ry="12" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-eh)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>星野 <code>starfield</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-ei" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-ei" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#ff8a8a"/>
+      <stop offset="55%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+    <radialGradient id="glow-ei" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(185,28,28,0.65)"/>
+      <stop offset="60%" stop-color="rgba(185,28,28,0.65)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(185,28,28,0.65)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-ei"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-ei)"/>
+  <g class="aura" opacity="0.55"><circle cx="100" cy="100" r="82" fill="none" stroke="rgba(190,30,30,0.35)" stroke-width="2" stroke-dasharray="6 12"/><circle cx="100" cy="100" r="92" fill="none" stroke="rgba(190,30,30,0.18)" stroke-width="1.2" stroke-dasharray="3 16"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-ei)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-ei)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 84 62 Q 72 68 62 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 20 12 Q 24 22 30 28" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-ei)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="11" ry="11" fill="#05070b"/><g class="ring"><g transform="rotate(0 100 100)"><circle cx="100" cy="78" r="5" fill="#05070b"/><path d="M 96 82 q 4 10 12 12 q -10 2 -12 -12 z" fill="#05070b"/></g><g transform="rotate(120 100 100)"><circle cx="100" cy="78" r="5" fill="#05070b"/><path d="M 96 82 q 4 10 12 12 q -10 2 -12 -12 z" fill="#05070b"/></g><g transform="rotate(240 100 100)"><circle cx="100" cy="78" r="5" fill="#05070b"/><path d="M 96 82 q 4 10 12 12 q -10 2 -12 -12 z" fill="#05070b"/></g></g>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-ei)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>写轮眼 <code>sharingan</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-ej" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-ej" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#fca5a5"/>
+      <stop offset="55%" stop-color="#7f1d1d"/>
+      <stop offset="100%" stop-color="#1c0000"/>
+    </radialGradient>
+    <radialGradient id="glow-ej" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(127,29,29,0.65)"/>
+      <stop offset="60%" stop-color="rgba(127,29,29,0.65)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(127,29,29,0.65)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-ej"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-ej)"/>
+  <g class="aura" opacity="0.55"><circle cx="100" cy="100" r="82" fill="none" stroke="rgba(190,30,30,0.35)" stroke-width="2" stroke-dasharray="6 12"/><circle cx="100" cy="100" r="92" fill="none" stroke="rgba(190,30,30,0.18)" stroke-width="1.2" stroke-dasharray="3 16"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-ej)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-ej)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 84 62 Q 72 68 62 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 20 12 Q 24 22 30 28" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 76 10 Q 72 22 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-ej)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="10" ry="10" fill="#05070b"/><g class="ring"><path transform="rotate(0 100 100)" d="M 100 100 L 132 82 Q 118 100 132 118 Z" fill="#05070b"/><path transform="rotate(90 100 100)" d="M 100 100 L 132 82 Q 118 100 132 118 Z" fill="#05070b"/><path transform="rotate(180 100 100)" d="M 100 100 L 132 82 Q 118 100 132 118 Z" fill="#05070b"/><path transform="rotate(270 100 100)" d="M 100 100 L 132 82 Q 118 100 132 118 Z" fill="#05070b"/></g>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-ej)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>万花筒 <code>mangekyo</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-ek" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-ek" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#e9d5ff"/>
+      <stop offset="55%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </radialGradient>
+    <radialGradient id="glow-ek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(168,85,247,0.6)"/>
+      <stop offset="60%" stop-color="rgba(168,85,247,0.6)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(168,85,247,0.6)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-ek"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-ek)"/>
+  <g class="aura" opacity="0.45"><ellipse cx="100" cy="100" rx="92" ry="68" fill="none" stroke="rgba(199,210,254,0.35)" stroke-width="2"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-ek)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-ek)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-ek)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="9" ry="9" fill="#05070b"/><circle cx="100" cy="100" r="16" fill="none" stroke="#05070b" stroke-width="2.4" stroke-opacity="0.75"/><circle cx="100" cy="100" r="24" fill="none" stroke="#05070b" stroke-width="2.4" stroke-opacity="0.75"/><circle cx="100" cy="100" r="32" fill="none" stroke="#05070b" stroke-width="2.4" stroke-opacity="0.75"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-ek)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>轮回眼 <code>rinnegan</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-el" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-el" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#cbd5e1"/>
+      <stop offset="55%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </radialGradient>
+    <radialGradient id="glow-el" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(100,116,139,0.6)"/>
+      <stop offset="60%" stop-color="rgba(100,116,139,0.6)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(100,116,139,0.6)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-el"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-el)"/>
+  <g class="aura" opacity="0.7"><circle class="spark" cx="174.0" cy="100.0" r="1.1" fill="#c7d2fe" style="animation-delay:0.00s"/><circle class="spark" cx="162.8" cy="138.0" r="1.7" fill="#c7d2fe" style="animation-delay:0.28s"/><circle class="spark" cx="115.6" cy="163.8" r="1.1" fill="#c7d2fe" style="animation-delay:0.56s"/><circle class="spark" cx="63.0" cy="146.1" r="1.7" fill="#c7d2fe" style="animation-delay:0.84s"/><circle class="spark" cx="22.9" cy="120.2" r="1.1" fill="#c7d2fe" style="animation-delay:1.12s"/><circle class="spark" cx="15.4" cy="77.8" r="1.7" fill="#c7d2fe" style="animation-delay:1.40s"/><circle class="spark" cx="63.0" cy="53.9" r="1.1" fill="#c7d2fe" style="animation-delay:1.68s"/><circle class="spark" cx="114.2" cy="41.9" r="1.7" fill="#c7d2fe" style="animation-delay:1.96s"/><circle class="spark" cx="168.9" cy="58.3" r="1.1" fill="#c7d2fe" style="animation-delay:2.24s"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-el)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-el)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-el)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <g class="ring"><circle cx="100" cy="100" r="17" fill="none" stroke="#05070b" stroke-width="3"/><path d="M 100 83 L 114 100 L 100 117 L 86 100 Z" fill="#05070b"/></g>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-el)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>三体智子 <code>sophon</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-em" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-em" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#f5f3ff"/>
+      <stop offset="55%" stop-color="#c7d2fe"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </radialGradient>
+    <radialGradient id="glow-em" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(199,210,254,0.6)"/>
+      <stop offset="60%" stop-color="rgba(199,210,254,0.6)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(199,210,254,0.6)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-em"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-em)"/>
+  <g class="aura" opacity="0.45"><ellipse cx="100" cy="100" rx="92" ry="68" fill="none" stroke="rgba(199,210,254,0.35)" stroke-width="2"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-em)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-em)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 84 62 Q 72 68 62 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-em)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="26" ry="26" fill="rgba(255,255,255,0.9)" stroke="rgba(99,102,241,0.5)" stroke-width="2"/><ellipse cx="100" cy="100" rx="10" ry="10" fill="rgba(99,102,241,0.75)"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-em)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>白眼 <code>byakugan</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-en" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-en" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#ff8a8a"/>
+      <stop offset="55%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+    <radialGradient id="glow-en" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(220,38,38,0.7)"/>
+      <stop offset="60%" stop-color="rgba(220,38,38,0.7)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(220,38,38,0.7)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-en"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-en)"/>
+  <g class="aura" opacity="0.55"><circle cx="100" cy="100" r="82" fill="none" stroke="rgba(190,30,30,0.35)" stroke-width="2" stroke-dasharray="6 12"/><circle cx="100" cy="100" r="92" fill="none" stroke="rgba(190,30,30,0.18)" stroke-width="1.2" stroke-dasharray="3 16"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-en)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-en)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 84 62 Q 72 68 62 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 20 12 Q 24 22 30 28" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 76 10 Q 72 22 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 18 80 Q 26 72 32 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 78 82 Q 70 72 64 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 6 42 Q 16 46 24 46" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 90 44 Q 80 48 72 46" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-en)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="9" ry="30" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-en)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>血瞳 <code>blood</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-eo" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-eo" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#d1d5db"/>
+      <stop offset="55%" stop-color="#9ca3af"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </radialGradient>
+    <radialGradient id="glow-eo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(156,163,175,0.55)"/>
+      <stop offset="60%" stop-color="rgba(156,163,175,0.55)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(156,163,175,0.55)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-eo"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-eo)"/>
+  <g class="aura" opacity="0.6"><circle class="ash" cx="30" cy="60" r="2.2" fill="rgba(203,213,225,0.7)" style="animation-delay:0.00s"/><circle class="ash" cx="70" cy="60" r="2.2" fill="rgba(203,213,225,0.7)" style="animation-delay:0.70s"/><circle class="ash" cx="120" cy="60" r="2.2" fill="rgba(203,213,225,0.7)" style="animation-delay:1.40s"/><circle class="ash" cx="165" cy="60" r="2.2" fill="rgba(203,213,225,0.7)" style="animation-delay:2.10s"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-eo)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-eo)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-eo)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="17" ry="17" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-eo)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>尸瞳 <code>corpse</code></figcaption></figure>
+<figure><div class="eye">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sclera-ep" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f3f6"/>
+      <stop offset="100%" stop-color="#c8ced8"/>
+    </radialGradient>
+    <radialGradient id="iris-ep" cx="42%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#7f1d1d"/>
+      <stop offset="55%" stop-color="#450a0a"/>
+      <stop offset="100%" stop-color="#0a0000"/>
+    </radialGradient>
+    <radialGradient id="glow-ep" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(127,29,29,0.7)"/>
+      <stop offset="60%" stop-color="rgba(127,29,29,0.7)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="rgba(127,29,29,0.7)" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="eyeClip-ep"><ellipse cx="100" cy="99" rx="86" ry="62"/></clipPath>
+  </defs>
+
+  <ellipse class="glow" cx="100" cy="100" rx="98" ry="80" fill="url(#glow-ep)"/>
+  <g class="aura" opacity="0.75"><circle class="ember" cx="46" cy="140" r="3" fill="rgba(248,113,113,0.85)" style="animation-delay:0.00s"/><circle class="ember" cx="92" cy="140" r="3" fill="rgba(248,113,113,0.85)" style="animation-delay:0.60s"/><circle class="ember" cx="140" cy="140" r="3" fill="rgba(248,113,113,0.85)" style="animation-delay:1.20s"/></g>
+
+  <g class="body">
+    <ellipse cx="100" cy="100" rx="88" ry="64" fill="rgba(15,23,42,0.28)"/>
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="url(#sclera-ep)"/>
+
+    <!-- 血丝与眼睑阴影都裁在眼球内 -->
+    <g clip-path="url(#eyeClip-ep)">
+      <path d="M 8 26 Q 20 22 30 26" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 12 58 Q 24 64 34 60" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 88 30 Q 76 24 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 84 62 Q 72 68 62 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 20 12 Q 24 22 30 28" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 76 10 Q 72 22 66 30" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M 18 80 Q 26 72 32 64" stroke="rgba(190,40,40,0.55)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="30" rx="96" ry="28" fill="rgba(15,23,42,0.14)"/>
+      <ellipse cx="100" cy="170" rx="96" ry="24" fill="rgba(15,23,42,0.10)"/>
+    </g>
+
+    <!-- 虹膜 + 瞳孔：视线只转这一组 -->
+    <g class="iris">
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="url(#iris-ep)"/>
+      <ellipse cx="100" cy="100" rx="40" ry="40" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="2"/>
+      <ellipse cx="100" cy="100" rx="9" ry="30" fill="#05070b"/>
+      <ellipse cx="86" cy="84" rx="11" ry="9" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="112" cy="114" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>
+    </g>
+
+    <!-- 上下眼睑：默认移出画布（睁开）；闭眼时回到 translate(0,0) -->
+    <g clip-path="url(#eyeClip-ep)">
+      <path class="lid-top" transform="translate(0, -200)" d="M 4 99 Q 100 -40 196 99 Z" fill="#12161f"/>
+      <path class="lid-bottom" transform="translate(0, 200)" d="M 4 99 Q 100 238 196 99 Z" fill="#12161f"/>
+    </g>
+
+    <ellipse cx="100" cy="99" rx="86" ry="62" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.6"/>
+  </g>
+</svg></div><figcaption>魔瞳 <code>demon</code></figcaption></figure>
+  </div>
+</body></html>

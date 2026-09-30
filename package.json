@@ -1,0 +1,21 @@
+{
+  "name": "dsh-pet-sophon",
+  "version": "0.1.0",
+  "private": true,
+  "description": "三体智子 · 桌面宠物：把 DSH 里的悬浮智子放出来，在系统桌面上自由活动（无边框透明置顶窗口，实时反映 DSH 会话状态）。",
+  "license": "MIT",
+  "author": "EternalNight996",
+  "type": "module",
+  "main": "main/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "smoke": "electron . --smoke",
+    "test": "node --test tests/*.test.mjs",
+    "icons": "python tools/make-icons.py",
+    "preview": "node tools/make-desk-preview.mjs && node --test tests/eye-svg.test.mjs"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

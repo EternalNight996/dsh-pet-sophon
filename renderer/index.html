@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'; img-src 'self' data:;" />
+<title>三体智子 · 桌面宠物</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: transparent;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+  }
+
+  /* ── 宠物本体 ───────────────────────────────────────────────────────── */
+  #pet {
+    position: absolute;
+    left: 0; top: 0;
+    will-change: transform;
+    transform-origin: 50% 50%;
+  }
+  #pet svg { display: block; overflow: visible; }
+
+  /* 呼吸 / 情绪动画 */
+  @keyframes pet-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+  @keyframes pet-breathe-fast { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+  @keyframes pet-halo { 0%,100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.14); } }
+  @keyframes pet-halo-fast { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.22); } }
+  @keyframes pet-ring-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes pet-aura-spin { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.1); } }
+  @keyframes pet-spark { 0%,100% { opacity: 0; } 45% { opacity: 0; } 50% { opacity: 1; } 58% { opacity: 0.2; } 66% { opacity: 0.9; } }
+  @keyframes pet-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes pet-ash { 0% { transform: translateY(0); opacity: 0.6; } 100% { transform: translateY(26px); opacity: 0; } }
+  @keyframes pet-ember { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateY(-28px) scale(0.25); opacity: 0; } }
+
+  #body { animation: pet-breathe 4.2s ease-in-out infinite; transform-origin: 100px 100px; }
+  body.mood-working #body { animation-duration: 1.6s; animation-name: pet-breathe-fast; }
+  body.mood-dormant #body { animation-duration: 7s; }
+  body.mood-working #glow { animation-name: pet-halo-fast; animation-duration: 1.2s; }
+  body.mood-dormant #glow { animation-duration: 6s; opacity: 0.25; }
+
+  #glow { animation: pet-halo 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
+  #ring { animation: pet-ring-spin 14s linear infinite; transform-origin: 100px 100px; }
+  #aura { animation: pet-aura-spin 9s linear infinite; transform-origin: 100px 100px; }
+  #spark { animation: pet-spark 2.6s linear infinite; }
+  #ash { animation: pet-ash 3.2s linear infinite; }
+  #ember { animation: pet-ember 2.4s ease-out infinite; }
+
+  /* ── 头顶进度 ───────────────────────────────────────────────────────── */
+  #label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 260px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font: 11px/1.35 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    color: #e5e7eb;
+    background: rgba(17, 24, 39, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+  }
+  #label.offline { opacity: 0.45; border-color: rgba(148, 163, 184, 0.14); }
+
+  /* ── hitbox 模式（透明可点区域） ─────────────────────────────────────── */
+  #hit {
+    position: absolute;
+    border-radius: 50%;
+    cursor: grab;
+    background: transparent;
+  }
+  #hit:active { cursor: grabbing; }
+  #hit.debug { background: rgba(245, 158, 11, 0.12); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.35); }
+</style>
+</head>
+<body>
+  <div id="pet" hidden></div>
+  <div id="label" hidden></div>
+  <div id="hit" hidden></div>
+  <script type="module" src="./renderer.js"></script>
+</body>
+</html>
